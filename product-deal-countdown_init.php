@@ -26,7 +26,17 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+define( 'PDC_PATH', plugin_dir_path( __FILE__ ) );
+//path fino alla cartella plugin
+define( 'PDC_URL', plugin_dir_url( __FILE__ ) );
+//url fino alla cartella plugin
+define( 'PDC_VERSION', '1.0.0' );
+define( 'PDC_TEXTDOMAIN', 'product-deal-countdown' );
+
+require_once( PDC_PATH . 'includes/functions.php' );
+
 if ( ! class_exists( 'Product_Deal_Countdown_Init' ) ) {
+
     class Product_Deal_Countdown_Init {
 
         /**
@@ -36,18 +46,9 @@ if ( ! class_exists( 'Product_Deal_Countdown_Init' ) ) {
         function __construct() {
 
             // Declare the methods
-            $this->define_constants();
+
             add_action( 'woocommerce_loaded', array( $this, 'load_plugin' ) );
 
-        }
-
-        public function define_constants() {
-            define( 'WCPDC_PATH', plugin_dir_path( __FILE__ ) );
-            //path fino alla cartella plugin
-            define( 'WCPDC_URL', plugin_dir_url( __FILE__ ) );
-            //url fino alla cartella plugin
-            define( 'WCPDC_VERSION', '1.0.0' );
-            define( 'WCPDC_TEXTDOMAIN', 'product-deal-countdown' );
         }
 
         public function load_plugin() {
@@ -55,18 +56,18 @@ if ( ! class_exists( 'Product_Deal_Countdown_Init' ) ) {
             /**
             * The class responsible ...
             */
-            require_once( WCPDC_PATH . 'admin/class_product_deal_countdown.php' );
+            require_once( PDC_PATH . 'admin/class_product_deal_countdown.php' );
 
         }
 
         // Activate method
         public static function activate() {
-            global $wp_version;
-            if ( version_compare( $wp_version, '4.4', '<' ) ) {
-                deactivate_plugins( basename( __FILE__ ) );
-                // Deactivate our plugin
-                wp_die( 'This plugin requires WordPress version 4.4 or higher.' );
-            }
+            // global $wp_version;
+            // if ( version_compare( $wp_version, '4.4', '<' ) ) {
+            //     deactivate_plugins( basename( __FILE__ ) );
+            //     // Deactivate our plugin
+            //     wp_die( 'This plugin requires WordPress version 4.4 or higher.' );
+            // }
         }
 
         //Deactivate method
