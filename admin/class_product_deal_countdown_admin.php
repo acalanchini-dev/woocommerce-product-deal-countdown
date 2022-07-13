@@ -34,6 +34,7 @@ class Product_Deal_Countdown_Admin {
         $this->settings = new Product_Deal_countdown_default_Data();
         add_action( 'init', array( $this, 'init' ) );
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), 99 );
     }
 
     /**
@@ -70,10 +71,11 @@ class Product_Deal_Countdown_Admin {
     public function product_deal_countdown_settings(){
 
 		$id        = $this->settings->get_id();
-		$div_class = is_rtl() ? 'woo-sctr-wrap woo-sctr-wrap-rtl' : 'woo-sctr-wrap';
+		// $div_class = is_rtl() ? 'woo-sctr-wrap woo-sctr-wrap-rtl' : 'woo-sctr-wrap';
+        $div_class = 'woo-pdc-wrap';
 		?>
         <div class="<?php echo esc_attr( $div_class ); ?>">
-            <h2 class=""><?php esc_html_e( 'Sales Countdown Timer', 'sales-countdown-timer' ) ?></h2>
+            <h2 class=""><?php esc_html_e( 'Product Deal Countdown', 'product-deal-countdown' ) ?></h2>
             <form class="vi-ui form" method="post">
 				<?php
 				wp_nonce_field( 'woo_ctr_settings_page_save', 'woo_ctr_nonce_field' );
@@ -1063,6 +1065,190 @@ class Product_Deal_Countdown_Admin {
 		do_action( 'support_product-deal-countdown' );
 	
     }
+
+
+
+    /**
+	 * Init Script in Admin
+	 */
+	public function admin_enqueue_scripts() {
+		$page = isset( $_REQUEST['page'] ) ? sanitize_text_field( $_REQUEST['page'] ) : '';
+		if ( $page === 'sales-countdown-timer-checkout' ) {
+			// global $wp_scripts;
+			// $scripts = $wp_scripts->registered;
+			// //			print_r($scripts);
+			// foreach ( $scripts as $k => $script ) {
+			// 	preg_match( '/^\/wp-/i', $script->src, $result );
+			// 	if ( count( array_filter( $result ) ) ) {
+			// 		preg_match( '/^(\/wp-content\/plugins|\/wp-content\/themes)/i', $script->src, $result1 );
+			// 		if ( count( array_filter( $result1 ) ) ) {
+			// 			wp_dequeue_script( $script->handle );
+			// 		}
+			// 	} else {
+			// 		if ( $script->handle != 'query-monitor' ) {
+			// 			wp_dequeue_script( $script->handle );
+			// 		}
+			// 	}
+			// }
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-button', SALES_COUNTDOWN_TIMER_CSS . 'button.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-form', SALES_COUNTDOWN_TIMER_CSS . 'form.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-menu', SALES_COUNTDOWN_TIMER_CSS . 'menu.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-message', SALES_COUNTDOWN_TIMER_CSS . 'message.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-label', SALES_COUNTDOWN_TIMER_CSS . 'label.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-input', SALES_COUNTDOWN_TIMER_CSS . 'input.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-transition', SALES_COUNTDOWN_TIMER_CSS . 'transition.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-segment', SALES_COUNTDOWN_TIMER_CSS . 'segment.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-popup', SALES_COUNTDOWN_TIMER_CSS . 'popup.min.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-tab', SALES_COUNTDOWN_TIMER_CSS . 'tab.css' );
+			// wp_enqueue_style( 'sales-countdown-timer-semantic-header', SALES_COUNTDOWN_TIMER_CSS . 'header.min.css' );
+
+			// wp_enqueue_style( 'sales-countdown-timer-admin-css', SALES_COUNTDOWN_TIMER_CSS . 'admin-checkout.css' );
+
+			// wp_enqueue_script( 'jquery-ui-sortable' );
+			// wp_enqueue_script( 'sales-countdown-timer-semantic-address', SALES_COUNTDOWN_TIMER_JS . 'address.min.js', array( 'jquery' ) );
+			// wp_enqueue_script( 'sales-countdown-timer-semantic-form', SALES_COUNTDOWN_TIMER_JS . 'form.js', array( 'jquery' ) );
+			// wp_enqueue_script( 'sales-countdown-timer-semantic-tab', SALES_COUNTDOWN_TIMER_JS . 'tab.js', array( 'jquery' ) );
+			// wp_enqueue_script( 'sales-countdown-timer-semantic-transition', SALES_COUNTDOWN_TIMER_JS . 'transition.min.js', array( 'jquery' ) );
+			// wp_enqueue_script( 'sales-countdown-timer-admin-js', SALES_COUNTDOWN_TIMER_JS . 'admin-checkout.js', array( 'jquery' ), SALES_COUNTDOWN_TIMER_VERSION );
+		} elseif ( $page == 'sales-countdown-timer' ) {
+			global $wp_scripts;
+			if ( isset( $wp_scripts->registered['jquery-ui-accordion'] ) ) {
+				unset( $wp_scripts->registered['jquery-ui-accordion'] );
+				wp_dequeue_script( 'jquery-ui-accordion' );
+			}
+			if ( isset( $wp_scripts->registered['accordion'] ) ) {
+				unset( $wp_scripts->registered['accordion'] );
+				wp_dequeue_script( 'accordion' );
+			}
+			$scripts = $wp_scripts->registered;
+			foreach ( $scripts as $k => $script ) {
+				preg_match( '/^\/wp-/i', $script->src, $result );
+				if ( count( array_filter( $result ) ) ) {
+					preg_match( '/^(\/wp-content\/plugins|\/wp-content\/themes)/i', $script->src, $result1 );
+					if ( count( array_filter( $result1 ) ) ) {
+						wp_dequeue_script( $script->handle );
+					}
+				} else {
+					if ( $script->handle != 'query-monitor' ) {
+						wp_dequeue_script( $script->handle );
+					}
+				}
+			}
+
+			/*Stylesheet*/
+			wp_enqueue_style( 'sales-countdown-timer-semantic-button', SALES_COUNTDOWN_TIMER_CSS . 'button.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-checkbox', SALES_COUNTDOWN_TIMER_CSS . 'checkbox.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-dropdown', SALES_COUNTDOWN_TIMER_CSS . 'dropdown.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-form', SALES_COUNTDOWN_TIMER_CSS . 'form.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-icon', SALES_COUNTDOWN_TIMER_CSS . 'icon.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-menu', SALES_COUNTDOWN_TIMER_CSS . 'menu.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-segment', SALES_COUNTDOWN_TIMER_CSS . 'segment.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-label', SALES_COUNTDOWN_TIMER_CSS . 'label.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-transition', SALES_COUNTDOWN_TIMER_CSS . 'transition.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-accordion', SALES_COUNTDOWN_TIMER_CSS . 'accordion.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-input', SALES_COUNTDOWN_TIMER_CSS . 'input.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-header', SALES_COUNTDOWN_TIMER_CSS . 'header.min.css' );
+			wp_enqueue_style( 'sales-countdown-timer-semantic-popup', SALES_COUNTDOWN_TIMER_CSS . 'popup.min.css' );
+
+			wp_enqueue_style( 'sales-countdown-timer-admin', SALES_COUNTDOWN_TIMER_CSS . 'sales-countdown-timer-admin.css', array(), SALES_COUNTDOWN_TIMER_VERSION );
+
+			wp_enqueue_script( 'sales-countdown-timer-semantic-checkbox', SALES_COUNTDOWN_TIMER_JS . 'checkbox.js', array( 'jquery' ) );
+			wp_enqueue_script( 'sales-countdown-timer-semantic-dropdown', SALES_COUNTDOWN_TIMER_JS . 'dropdown.js', array( 'jquery' ) );
+			wp_enqueue_script( 'sales-countdown-timer-semantic-form', SALES_COUNTDOWN_TIMER_JS . 'form.js', array( 'jquery' ) );
+			wp_enqueue_script( 'sales-countdown-timer-semantic-tab', SALES_COUNTDOWN_TIMER_JS . 'tab.js', array( 'jquery' ) );
+			wp_enqueue_script( 'sales-countdown-timer-semantic-transition', SALES_COUNTDOWN_TIMER_JS . 'transition.min.js', array( 'jquery' ) );
+			wp_enqueue_script( 'sales-countdown-timer-semantic-accordion', SALES_COUNTDOWN_TIMER_JS . 'accordion.min.js', array( 'jquery' ) );
+
+			wp_enqueue_script( 'sales-countdown-timer-admin', SALES_COUNTDOWN_TIMER_JS . 'sales-countdown-timer-admin.js', array( 'jquery' ), SALES_COUNTDOWN_TIMER_VERSION );
+			/*Color picker*/
+			wp_enqueue_script(
+				'iris', admin_url( 'js/iris.min.js' ), array(
+				'jquery-ui-draggable',
+				'jquery-ui-slider',
+				'jquery-touch-punch'
+			), false, 1
+			);
+			$id = $this->settings->get_id();
+			if ( is_array( $id ) && count( $id ) ) {
+				$css = '';
+
+				for ( $i = 0; $i < count( $id ); $i ++ ) {
+					if ( $this->settings->get_datetime_value_bg_color()[ $i ] ) {
+						$css .= '.woo-sctr-accordion-wrap[data-accordion_id="' . $i . '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{' . esc_attr__( 'background:' ) . $this->settings->get_datetime_value_bg_color()[ $i ] . ';}';
+					}
+					if ( $this->settings->get_countdown_timer_item_border_color()[ $i ] ) {
+						$css .= '.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle .woo-sctr-value-bar{' . esc_attr__( 'border-color: ' ) . $this->settings->get_countdown_timer_item_border_color()[ $i ] . ';}';
+						$css .= '.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle .woo-sctr-first50-bar{' . esc_attr__( 'background-color: ' ) . $this->settings->get_countdown_timer_item_border_color()[ $i ] . ';}';
+					}
+					if ( $this->settings->get_datetime_value_font_size()[ $i ] ) {
+						$css .= '.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle{' . esc_attr__( 'font-size:' ) . $this->settings->get_datetime_value_font_size()[ $i ] . 'px;}';
+					}
+
+					$css .= '.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-wrap-wrap .woo-sctr-shortcode-countdown-1{';
+					if ( $this->settings->get_countdown_timer_color()[ $i ] ) {
+						$css .= esc_attr__( 'color:' ) . $this->settings->get_countdown_timer_color()[ $i ] . ';';
+					}
+					if ( $this->settings->get_countdown_timer_bg_color()[ $i ] ) {
+						$css .= esc_html__( 'background:' ) . $this->settings->get_countdown_timer_bg_color()[ $i ] . ';';
+					}
+					if ( $this->settings->get_countdown_timer_padding()[ $i ] ) {
+						$css .= esc_html__( 'padding:' ) . $this->settings->get_countdown_timer_padding()[ $i ] . 'px;';
+					}
+					if ( $this->settings->get_countdown_timer_border_radius()[ $i ] ) {
+						$css .= esc_html__( 'border-radius:' ) . $this->settings->get_countdown_timer_border_radius()[ $i ] . 'px;';
+					}
+					if ( $this->settings->get_countdown_timer_border_color()[ $i ] ) {
+						$css .= esc_html__( 'border: 1px solid ' ) . $this->settings->get_countdown_timer_border_color()[ $i ] . ';';
+					}
+					$css .= '}';
+					$css .= '.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-wrap-wrap .woo-sctr-shortcode-countdown-1 .woo-sctr-shortcode-countdown-value{';
+					if ( $this->settings->get_datetime_value_color()[ $i ] ) {
+						$css .= esc_attr__( 'color:' ) . $this->settings->get_datetime_value_color()[ $i ] . ';';
+					}
+					if ( $this->settings->get_datetime_value_bg_color()[ $i ] ) {
+						$css .= esc_attr__( 'background:' ) . $this->settings->get_datetime_value_bg_color()[ $i ] . ';';
+					}
+					if ( $this->settings->get_datetime_value_font_size()[ $i ] ) {
+						$css .= esc_attr__( 'font-size:' ) . $this->settings->get_datetime_value_font_size()[ $i ] . 'px;';
+					}
+					$css .= '}';
+					$css .= '.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-wrap-wrap .woo-sctr-shortcode-countdown-1 .woo-sctr-shortcode-countdown-text{';
+					if ( $this->settings->get_datetime_unit_color()[ $i ] ) {
+						$css .= esc_attr__( 'color:' ) . $this->settings->get_datetime_unit_color()[ $i ] . ';';
+					}
+					if ( $this->settings->get_datetime_unit_bg_color()[ $i ] ) {
+						$css .= esc_attr__( 'background:' ) . $this->settings->get_datetime_unit_bg_color()[ $i ] . ';';
+					}
+					if ( $this->settings->get_datetime_unit_font_size()[ $i ] ) {
+						$css .= esc_attr__( 'font-size:' ) . $this->settings->get_datetime_unit_font_size()[ $i ] . 'px;';
+					}
+					$css .= '}';
+
+					$css1 = '';
+					if ( $this->settings->get_countdown_timer_item_height()[ $i ] ) {
+						$css1 .= esc_html__( 'height:' ) . $this->settings->get_countdown_timer_item_height()[ $i ] . 'px;';
+					}
+					if ( $this->settings->get_countdown_timer_item_width()[ $i ] ) {
+						$css1 .= esc_html__( 'width:' ) . $this->settings->get_countdown_timer_item_width()[ $i ] . 'px;';
+					}
+					if ( $this->settings->get_countdown_timer_item_border_radius()[ $i ] ) {
+						$css1 .= esc_html__( 'border-radius:' ) . $this->settings->get_countdown_timer_item_border_radius()[ $i ] . 'px;';
+					}
+					if ( $this->settings->get_countdown_timer_item_border_color()[ $i ] ) {
+						$css1 .= esc_html__( 'border:1px solid ' ) . $this->settings->get_countdown_timer_item_border_color()[ $i ] . ';';
+					}
+					if ( $css1 ) {
+						$css .= '.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-countdown-wrap.woo-sctr-shortcode-countdown-style-1 .woo-sctr-shortcode-countdown-unit,.woo-sctr-accordion-wrap-' . $i . ' .woo-sctr-shortcode-countdown-wrap.woo-sctr-shortcode-countdown-style-2 .woo-sctr-shortcode-countdown-value{' . $css1 . '}';
+					}
+
+				}
+
+
+				wp_add_inline_style( 'sales-countdown-timer-admin', $css );
+			}
+		}
+	}
+
 }
 
 
