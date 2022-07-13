@@ -32,6 +32,7 @@ define( 'PDC_URL', plugin_dir_url( __FILE__ ) );
 //url fino alla cartella plugin
 define( 'PDC_VERSION', '1.0.0' );
 define( 'PDC_TEXTDOMAIN', 'product-deal-countdown' );
+define( 'PRODUCT_DEAL_COUNTDOWN_LANGUAGES', PDC_PATH . "languages/");
 
 require_once( PDC_PATH . 'includes/functions.php' );
 
@@ -56,7 +57,8 @@ if ( ! class_exists( 'Product_Deal_Countdown_Init' ) ) {
             /**
             * The class responsible ...
             */
-            require_once( PDC_PATH . 'admin/class_product_deal_countdown.php' );
+            require_once( PDC_PATH . 'admin/class_product_deal_countdown_admin.php' );
+            
 
         }
 

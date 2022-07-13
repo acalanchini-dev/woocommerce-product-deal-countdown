@@ -12,26 +12,22 @@
 */
 
 /**
-* The core plugin class.
-*
-* This is used to define internationalization, admin-specific hooks, and
-* public-facing site hooks.
-*
-* Also maintains the unique identifier of this plugin as well as the current
-* version of the plugin.
 *
 * @since      1.0.0
 * @package     product-deal-countdown
-* @subpackage  product-deal-countdown/admin
+* @subpackage  product-deal-countdown/frontend
 * @author     Alessio Calanchini <ac.calanchini@gmail.com>
 */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 
-    class Product_Deal_Countdown {
+    class Product_Deal_Countdown_Frontend {
 
         public function __construct() {
      
         }
 
     }
-    new Product_Deal_Countdown();
+    new Product_Deal_Countdown_Frontend();
