@@ -13,6 +13,8 @@
 * Update URI:        https://example.com/my-plugin/
 * Text Domain:       woocommerce-product-deal-countdown
 * Domain Path:       /languages
+* WC requires at least: 4.0
+* WC tested up to: 6.5
 *
 *
 * @since      1.0.0
