@@ -1,6 +1,6 @@
 <?php
 /**
-* Plugin Name:       WooCommerce Product Deal Countdown
+* Plugin Name:       Product Deal Countdown for Woocommerce
 * Plugin URI:        https://example.com/plugins/the-basics/
 * Description:
 * Version:           1.0
@@ -11,14 +11,14 @@
 * License:           GPL v2 or later
 * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 * Update URI:        https://example.com/my-plugin/
-* Text Domain:       woocommerce-product-deal-countdown
+* Text Domain:       product-deal-countdown
 * Domain Path:       /languages
 * WC requires at least: 4.0
 * WC tested up to: 6.5
 *
 *
 * @since      1.0.0
-* @package    woocommerce-product-deal-countdown
+* @package    product-deal-countdown
 * @author     Alessio Calanchini <ac.calanchini@gmail.com>
 */
 
@@ -26,8 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-if ( ! class_exists( 'Woocommerce_Product_Deal_Countdown_Init' ) ) {
-    class Woocommerce_Product_Deal_Countdown_Init {
+if ( ! class_exists( 'Product_Deal_Countdown_Init' ) ) {
+    class Product_Deal_Countdown_Init {
 
         /**
         * Definiamo costruttore della classe
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Woocommerce_Product_Deal_Countdown_Init' ) ) {
             define( 'WCPDC_URL', plugin_dir_url( __FILE__ ) );
             //url fino alla cartella plugin
             define( 'WCPDC_VERSION', '1.0.0' );
-            define( 'WCPDC_TEXTDOMAIN', 'woocommerce-product-deal-countdown' );
+            define( 'WCPDC_TEXTDOMAIN', 'product-deal-countdown' );
         }
 
         public function load_plugin() {
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Woocommerce_Product_Deal_Countdown_Init' ) ) {
             /**
             * The class responsible ...
             */
-            require_once( WCPDC_PATH . 'admin/class_wc_product_deal_countdown.php' );
+            require_once( WCPDC_PATH . 'admin/class_product_deal_countdown.php' );
 
         }
 
@@ -80,9 +80,9 @@ if ( ! class_exists( 'Woocommerce_Product_Deal_Countdown_Init' ) ) {
     }
 }
 
-if ( class_exists( 'Woocommerce_Product_Deal_Countdown_Init' ) ) {
-    register_activation_hook( __FILE__, array( 'Woocommerce_Product_Deal_Countdown_Init', 'activate' ) );
-    register_deactivation_hook( __FILE__, array( 'Woocommerce_Product_Deal_Countdown_Init', 'deactivate' ) );
-    register_uninstall_hook( __FILE__, array( 'Woocommerce_Product_Deal_Countdown_Init', 'uninstall' ) );
-    $wc_order_stats = new Woocommerce_Product_Deal_Countdown_Init();
+if ( class_exists( 'Product_Deal_Countdown_Init' ) ) {
+    register_activation_hook( __FILE__, array( 'Product_Deal_Countdown_Init', 'activate' ) );
+    register_deactivation_hook( __FILE__, array( 'Product_Deal_Countdown_Init', 'deactivate' ) );
+    register_uninstall_hook( __FILE__, array( 'Product_Deal_Countdown_Init', 'uninstall' ) );
+    $product_deal_countdown = new Product_Deal_Countdown_Init();
 }

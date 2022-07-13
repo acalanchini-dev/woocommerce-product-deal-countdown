@@ -9,8 +9,6 @@
 * @link       ac.com
 * @since      1.0.0
 *
-* @package    woocommerce-product-deal-countdowns
-* @subpackage woocommerce-product-deal-countdown/admin
 */
 
 /**
@@ -23,18 +21,17 @@
 * version of the plugin.
 *
 * @since      1.0.0
-* @package     woocommerce-product-deal-countdown
-* @subpackage  woocommerce-product-deal-countdown/admin
+* @package     product-deal-countdown
+* @subpackage  product-deal-countdown/admin
 * @author     Alessio Calanchini <ac.calanchini@gmail.com>
 */
 
-if ( class_exists( 'woocommerce' ) ) {
-    class Wc_Product_Deal_Countdown extends WC_Product_Simple {
+
+    class Product_Deal_Countdown {
 
         public function __construct() {
      
         }
 
     }
-    new Wc_Product_Deal_Countdown();
-}
+    new Product_Deal_Countdown();
