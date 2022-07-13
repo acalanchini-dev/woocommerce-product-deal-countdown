@@ -23,21 +23,18 @@
 * version of the plugin.
 *
 * @since      1.0.0
-* @package    wc-widget-order-stats
-* @subpackage wc-widget-order-stats/admin
+* @package     woocommerce-product-deal-countdown
+* @subpackage  woocommerce-product-deal-countdown/admin
 * @author     Alessio Calanchini <ac.calanchini@gmail.com>
 */
 
-class Wc_Product_Deal_Countdown {
+if ( class_exists( 'woocommerce' ) ) {
+    class Wc_Product_Deal_Countdown extends WC_Product_Simple {
 
-    public function __construct() {
-       
+        public function __construct() {
+     
+        }
 
     }
-
-   
-
-  
-
+    new Wc_Product_Deal_Countdown();
 }
-new Wc_Product_Deal_Countdown();
