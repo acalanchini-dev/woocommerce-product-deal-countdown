@@ -1136,30 +1136,30 @@ class Product_Deal_Countdown_Admin {
 			}
 
 			/*Stylesheet*/
-			wp_enqueue_style( 'sales-countdown-timer-semantic-button', SALES_COUNTDOWN_TIMER_CSS . 'button.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-checkbox', SALES_COUNTDOWN_TIMER_CSS . 'checkbox.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-dropdown', SALES_COUNTDOWN_TIMER_CSS . 'dropdown.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-form', SALES_COUNTDOWN_TIMER_CSS . 'form.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-icon', SALES_COUNTDOWN_TIMER_CSS . 'icon.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-menu', SALES_COUNTDOWN_TIMER_CSS . 'menu.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-segment', SALES_COUNTDOWN_TIMER_CSS . 'segment.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-label', SALES_COUNTDOWN_TIMER_CSS . 'label.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-transition', SALES_COUNTDOWN_TIMER_CSS . 'transition.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-accordion', SALES_COUNTDOWN_TIMER_CSS . 'accordion.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-input', SALES_COUNTDOWN_TIMER_CSS . 'input.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-header', SALES_COUNTDOWN_TIMER_CSS . 'header.min.css' );
-			wp_enqueue_style( 'sales-countdown-timer-semantic-popup', SALES_COUNTDOWN_TIMER_CSS . 'popup.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-button', SALES_COUNTDOWN_TIMER_CSS . 'button.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-checkbox', SALES_COUNTDOWN_TIMER_CSS . 'checkbox.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-dropdown', SALES_COUNTDOWN_TIMER_CSS . 'dropdown.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-form', SALES_COUNTDOWN_TIMER_CSS . 'form.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-icon', SALES_COUNTDOWN_TIMER_CSS . 'icon.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-menu', SALES_COUNTDOWN_TIMER_CSS . 'menu.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-segment', SALES_COUNTDOWN_TIMER_CSS . 'segment.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-label', SALES_COUNTDOWN_TIMER_CSS . 'label.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-transition', SALES_COUNTDOWN_TIMER_CSS . 'transition.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-accordion', SALES_COUNTDOWN_TIMER_CSS . 'accordion.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-input', SALES_COUNTDOWN_TIMER_CSS . 'input.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-header', SALES_COUNTDOWN_TIMER_CSS . 'header.min.css' );
+			// wp_enqueue_style( 'product-deal-countdown-semantic-popup', SALES_COUNTDOWN_TIMER_CSS . 'popup.min.css' );
 
-			wp_enqueue_style( 'sales-countdown-timer-admin', SALES_COUNTDOWN_TIMER_CSS . 'sales-countdown-timer-admin.css', array(), SALES_COUNTDOWN_TIMER_VERSION );
+			// wp_enqueue_style( 'product-deal-countdown-admin', SALES_COUNTDOWN_TIMER_CSS . 'sales-countdown-timer-admin.css', array(), SALES_COUNTDOWN_TIMER_VERSION );
 
-			wp_enqueue_script( 'sales-countdown-timer-semantic-checkbox', SALES_COUNTDOWN_TIMER_JS . 'checkbox.js', array( 'jquery' ) );
-			wp_enqueue_script( 'sales-countdown-timer-semantic-dropdown', SALES_COUNTDOWN_TIMER_JS . 'dropdown.js', array( 'jquery' ) );
-			wp_enqueue_script( 'sales-countdown-timer-semantic-form', SALES_COUNTDOWN_TIMER_JS . 'form.js', array( 'jquery' ) );
-			wp_enqueue_script( 'sales-countdown-timer-semantic-tab', SALES_COUNTDOWN_TIMER_JS . 'tab.js', array( 'jquery' ) );
-			wp_enqueue_script( 'sales-countdown-timer-semantic-transition', SALES_COUNTDOWN_TIMER_JS . 'transition.min.js', array( 'jquery' ) );
-			wp_enqueue_script( 'sales-countdown-timer-semantic-accordion', SALES_COUNTDOWN_TIMER_JS . 'accordion.min.js', array( 'jquery' ) );
+			wp_enqueue_script( 'product-deal-countdown-semantic-checkbox', PDC_PATH . 'js/checkbox.js', array( 'jquery' ) );
+			wp_enqueue_script( 'product-deal-countdown-semantic-dropdown', PDC_PATH . 'js/dropdown.js', array( 'jquery' ) );
+			wp_enqueue_script( 'product-deal-countdown-semantic-form', PDC_PATH . 'js/form.js', array( 'jquery' ) );
+			wp_enqueue_script( 'product-deal-countdown-semantic-tab', PDC_PATH . 'js/tab.js', array( 'jquery' ) );
+			wp_enqueue_script( 'product-deal-countdown-semantic-transition', PDC_PATH . 'js/transition.min.js', array( 'jquery' ) );
+			wp_enqueue_script( 'product-deal-countdown-semantic-accordion', PDC_PATH . 'js/accordion.min.js', array( 'jquery' ) );
 
-			wp_enqueue_script( 'sales-countdown-timer-admin', SALES_COUNTDOWN_TIMER_JS . 'sales-countdown-timer-admin.js', array( 'jquery' ), SALES_COUNTDOWN_TIMER_VERSION );
+			wp_enqueue_script( 'product-deal-countdown-admin', PDC_PATH . 'js/sales-countdown-timer-admin.js', array( 'jquery' ), '1.0' );
 			/*Color picker*/
 			wp_enqueue_script(
 				'iris', admin_url( 'js/iris.min.js' ), array(
