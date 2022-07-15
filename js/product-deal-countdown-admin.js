@@ -89,7 +89,7 @@ jQuery(document).ready(function () {
     // change name
     function handleNameChange() {
         jQuery('.woo-sctr-name').unbind().on('keyup', function () {
-            jQuery(this).parent().parent().parent().parent().find('.woo-sctr-accordion-name').html(jQuery(this).val());
+            jQuery(this).parent().parent().parent().parent().find('.pdc-accordion-name').html(jQuery(this).val());
         })
     }
 
@@ -120,7 +120,7 @@ jQuery(document).ready(function () {
     function duplicateItem() {
         jQuery('.woo-sctr-button-edit-duplicate').unbind().on('click', function (e) {
             e.stopPropagation();
-            let new_id = jQuery('.woo-sctr-accordion-wrap').length;
+            let new_id = jQuery('.pdc-accordion-wrap').length;
             let inline_style = jQuery('#sales-countdown-timer-admin-inline-css').html();
             var current = jQuery(this).parent().parent().parent();
             var newRow = current.clone();
@@ -129,7 +129,7 @@ jQuery(document).ready(function () {
                 let selected = current.find('.vi-ui.dropdown').eq(i).dropdown('get value');
                 newRow.find('.vi-ui.dropdown').eq(i).dropdown('set selected', selected);
             }
-            inline_style += '.woo-sctr-accordion-wrap[data-accordion_id="' + new_id + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:' + newRow.find('.woo-sctr-datetime-value-bg-color').val() + ';}';
+            inline_style += '.pdc-accordion-wrap[data-accordion_id="' + new_id + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:' + newRow.find('.woo-sctr-datetime-value-bg-color').val() + ';}';
             jQuery('#sales-countdown-timer-admin-inline-css').html(inline_style);
             var $now = Date.now();
             newRow.attr('data-accordion_id', new_id);
@@ -259,13 +259,13 @@ jQuery(document).ready(function () {
                 jQuery(this).parent().find('.color-picker').css({backgroundColor: ui.color.toString()});
                 jQuery(this).parent().parent().parent().parent().find('.woo-sctr-shortcode-countdown-value').not('.woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-value').css({backgroundColor: ui.color.toString()});
                 let str = jQuery('#sales-countdown-timer-admin-inline-css').html();
-                let reg_str = '.woo-sctr-accordion-wrap[data-accordion_id="' + parent_accordion.attr('data-accordion_id') + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:([\\s\\S]*?);}';
+                let reg_str = '.pdc-accordion-wrap[data-accordion_id="' + parent_accordion.attr('data-accordion_id') + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:([\\s\\S]*?);}';
                 let reg = new RegExp(reg_str, 'igm');
                 let match = reg.exec(str);
                 if (match) {
-                    jQuery('#sales-countdown-timer-admin-inline-css').html(str.replace(match[0], '.woo-sctr-accordion-wrap[data-accordion_id="' + parent_accordion.attr('data-accordion_id') + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:' + ui.color.toString() + ';}'));
+                    jQuery('#sales-countdown-timer-admin-inline-css').html(str.replace(match[0], '.pdc-accordion-wrap[data-accordion_id="' + parent_accordion.attr('data-accordion_id') + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:' + ui.color.toString() + ';}'));
                 } else {
-                    jQuery('#sales-countdown-timer-admin-inline-css').html(str + '.woo-sctr-accordion-wrap[data-accordion_id="' + parent_accordion.attr('data-accordion_id') + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:' + ui.color.toString() + ';}');
+                    jQuery('#sales-countdown-timer-admin-inline-css').html(str + '.pdc-accordion-wrap[data-accordion_id="' + parent_accordion.attr('data-accordion_id') + '"] .woo-sctr-shortcode-countdown-style-4 .woo-sctr-shortcode-countdown-1 .woo-sctr-progress-circle:after{background:' + ui.color.toString() + ';}');
                 }
             }
         }).on('keyup', function () {
@@ -383,8 +383,8 @@ jQuery(document).ready(function () {
                 if (!jQuery('input[name="woo_ctr_name[]"]').eq(z).val()) {
                     alert('Name cannot be empty!');
                     jQuery('input[name="woo_ctr_name[]"]').eq(z).focus();
-                    if (!jQuery('.woo-sctr-accordion').eq(z).hasClass('woo-sctr-active-accordion')) {
-                        jQuery('.woo-sctr-accordion').eq(z).addClass('woo-sctr-active-accordion');
+                    if (!jQuery('.pdc-accordion').eq(z).hasClass('woo-sctr-active-accordion')) {
+                        jQuery('.pdc-accordion').eq(z).addClass('woo-sctr-active-accordion');
                         jQuery('.woo-sctr-panel').eq(z).css({'max-height': jQuery('.woo-sctr-panel').eq(z).prop('scrollHeight') + 'px'})
                     }
                     jQuery('.woo-sctr-save').removeClass('woo-sctr-adding');
@@ -396,8 +396,8 @@ jQuery(document).ready(function () {
                     if (jQuery('input[name="woo_ctr_name[]"]').eq(z).val() === jQuery('input[name="woo_ctr_name[]"]').eq(v).val()) {
                         alert("Names are unique!");
                         jQuery('input[name="woo_ctr_name[]"]').eq(v).focus();
-                        if (!jQuery('.woo-sctr-accordion').eq(v).hasClass('woo-sctr-active-accordion')) {
-                            jQuery('.woo-sctr-accordion').eq(v).addClass('woo-sctr-active-accordion');
+                        if (!jQuery('.pdc-accordion').eq(v).hasClass('woo-sctr-active-accordion')) {
+                            jQuery('.pdc-accordion').eq(v).addClass('woo-sctr-active-accordion');
                             jQuery('.woo-sctr-panel').eq(v).css({'max-height': jQuery('.woo-sctr-panel').eq(v).prop('scrollHeight') + 'px'})
                         }
                         jQuery('.woo-sctr-save').removeClass('woo-sctr-adding');

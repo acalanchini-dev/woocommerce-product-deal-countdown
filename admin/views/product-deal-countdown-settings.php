@@ -9,56 +9,8 @@
      <h2 class=""><?php esc_html_e( 'Product Deal Countdown', 'product-deal-countdown' ) ?></h2>
      <form class="vi-ui form" method="post">
          <?php
-				wp_nonce_field( 'woo_ctr_settings_page_save', 'woo_ctr_nonce_field' );
-				if ( get_transient( '_sales_countdown_timer_demo_product_init' ) ) {
-					$sale_products     = get_transient( 'wc_products_onsale' );
-					$default_countdown = count( $id ) ? $id[0] : 'salescountdowntimer';
-					$now               = current_time( 'timestamp', true );
-					$product_url       = '';
-					if ( false === $sale_products ) {
-						$products_args = array(
-							'post_type'      => 'product',
-							'status'         => 'publish',
-							'posts_per_page' => - 1,
-							'meta_query'     => array(
-								'relation' => 'AND',
-								array(
-									'key'     => '_sale_price',
-									'value'   => '',
-									'compare' => '!=',
-								),
-								array(
-									'key'     => '_sale_price_dates_to',
-									'value'   => $now,
-									'compare' => '>',
-								)
-							),
-						);
-						$the_query     = new WP_Query( $products_args );
-						if ( $the_query->have_posts() ) {
-							while ( $the_query->have_posts() ) {
-								$the_query->the_post();
-								$product_id = get_the_ID();
-								update_post_meta( $product_id, '_woo_ctr_select_countdown_timer', $default_countdown );
-								if ( ! $product_url ) {
-									$product_url = get_permalink( $product_id );
-								}
-							}
-						}
-						wp_reset_postdata();
-					} elseif ( is_array( $sale_products ) && count( $sale_products ) ) {
-						foreach ( $sale_products as $product_id ) {
-							update_post_meta( $product_id, '_woo_ctr_select_countdown_timer', $default_countdown );
-							if ( ! $product_url ) {
-								$product_url = get_permalink( $product_id );
-							}
-						}
-					}
-					if ( $product_url ) {
-						echo esc_html__( 'See your very first sales countdown timer ', 'product-deal-countdown' ) . '<a href="' . $product_url . '" target="_blank">' . esc_html__( 'here.', 'product-deal-countdown' ) . '</a>';
-						delete_transient( '_sales_countdown_timer_demo_product_init' );
-					}
-				}
+				wp_nonce_field( 'pdc_settings_page_save', 'pdc_nonce_field' );
+				
 				if ( is_array( $id ) && count( $id ) ) {
 					?>
          <?php
@@ -77,9 +29,9 @@
 								$time_separator = '';
 						}
 						?>
-         <div class="woo-sctr-accordion-wrap woo-sctr-accordion-wrap-<?php echo esc_attr( $i ); ?> vi-ui segment"
+         <div class="pdc-accordion-wrap pdc-accordion-wrap-<?php echo esc_attr( $i ); ?> vi-ui segment"
              data-accordion_id="<?php echo esc_attr( $i ); ?>">
-             <div class="woo-sctr-accordion">
+             <div class="pdc-accordion">
                  <div class="vi-ui toggle checkbox">
                      <input type="hidden" name="woo_ctr_active[]" class="woo-sctr-active"
                          value="<?php echo esc_attr( $this->settings->get_active()[ $i ] ); ?>">
@@ -87,7 +39,7 @@
                          <?php echo $this->settings->get_active()[ $i ] ? 'checked' : ''; ?>><label>
                  </div>
                  <span
-                     class="woo-sctr-accordion-name"><?php echo esc_html( $this->settings->get_names()[ $i ] ); ?></span>
+                     class="pdc-accordion-name"><?php echo esc_html( $this->settings->get_names()[ $i ] ); ?></span>
 
                  <span class="woo-sctr-short-description">
                      <span
@@ -117,7 +69,7 @@
                          class="woo-sctr-button-edit-remove vi-ui negative button"><?php esc_html_e( 'Remove', 'product-deal-countdown' ) ?></span>
                  </span>
              </div>
-             <div class="woo-sctr-panel vi-ui styled fluid accordion" id="woo-sctr-panel-accordion">
+             <div class="woo-sctr-panel vi-ui styled fluid accordion" id="pdc-panel-accordion">
                  <div class="title  <?php if ( $this->settings->get_active()[ $i ] ) {
 									echo 'active';
 								} ?>">

@@ -3,16 +3,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Product_Deal_countdown_default_Data {
+class Product_Deal_Countdown_Default_Data {
 	private $params, $default;
 
 	/**
-	 * SALES_COUNTDOWN_TIMER_Data constructor.
+	 * Product_Deal_countdown_default_Data constructor.
 	 * Init setting
 	 */
 	public function __construct() {
 
-		global $woo_ctr_settings;
+		global $pdc_settings;
 		$this->default = array(
 			'id'                                 => array( 'productdealcountdown' ),
 			'names'                              => array( 'Countdown timer' ),
@@ -68,14 +68,14 @@ class Product_Deal_countdown_default_Data {
 			'stick_to_top'                    => array( 1 ),
 
 		);
-		if (!$woo_ctr_settings){
-			$woo_ctr_settings = get_option( 'product_deal_countdown_params', array() );
+		if (!$pdc_settings){
+			$pdc_settings = get_option( 'product_deal_countdown_params', array() );
 		}
-		// if (empty($woo_ctr_settings) || empty($woo_ctr_settings['names'])){
-		// 	set_transient( '_sales_countdown_timer_demo_product_init', current_time( 'timestamp' ), 180 * DAY_IN_SECONDS );
-		// }
+		if (empty($pdc_settings) || empty($pdc_settings['names'])){
+			set_transient( '_product_countdown_demo_init', current_time( 'timestamp' ), 180 * DAY_IN_SECONDS );
+		}
 
-		$this->params = apply_filters( 'woo_ctr_settings_args', wp_parse_args( $woo_ctr_settings, $this->default ) );
+		$this->params = apply_filters( 'woo_ctr_settings_args', wp_parse_args( $pdc_settings, $this->default ) );
 	}
 
 	/**
@@ -322,4 +322,4 @@ class Product_Deal_countdown_default_Data {
 	}
 }
 
-new Product_Deal_countdown_default_Data();
+new Product_Deal_Countdown_Default_Data();

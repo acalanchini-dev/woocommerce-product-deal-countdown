@@ -1,9 +1,4 @@
-.woo-sctr-button-save-container {
-    position: fixed;
-    top: 30px;
-    right: 5px;
-    z-index: 99;
-}
+
 
 .vi-ui.segment {
     height: 100%;
@@ -61,15 +56,6 @@ form.vi-ui [data-tooltip]:after {
     transition: max-height 0.7s ease-out;
 }
 
-.woo-sctr-button-edit {
-    position: absolute;
-    right: 0;
-    z-index: 1;
-    box-sizing: border-box;
-    top: -10px;
-    display: none;
-    align-items: center;
-}
 
 .woo-sctr-accordion:nth-child(n):hover .woo-sctr-button-edit:nth-child(n) {
     display: flex;
